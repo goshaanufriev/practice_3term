@@ -1,1 +1,2 @@
 D:\code\c++\slabs_final\x64\Debug\slabs_final.exe
+D:\МГТУ\практика 3 сем\c++\slabs_final\x64\Debug\slabs_final.exe

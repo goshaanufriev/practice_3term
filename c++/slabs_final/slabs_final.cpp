@@ -8,21 +8,21 @@
 
 using namespace std;
 
-class cell;
-class point_for_cell;
+class Cell;
+class Vertex;
 
-class point
+class Point
 {
 protected:
     double x;
     double y;
 public:
-    friend ostream& operator<<(ostream& out, point& p)
+    friend ostream& operator<<(ostream& out, Point& p)
     {
         out << "( " << p.x << " ; " << p.y << " )";
         return out;
     }
-    friend ifstream& operator>>(ifstream& fin, point& p)
+    friend ifstream& operator>>(ifstream& fin, Point& p)
     {
         fin >> p.x >> p.y;
         return fin;
@@ -39,7 +39,7 @@ public:
     }
 };
 
-class otrezok
+class Segment
 {
 private:
     int n;
@@ -47,8 +47,8 @@ private:
     double b;
     bool f;
 public:
-    otrezok() :n(), k(), b(), f(false) {};
-    otrezok(int n_, double k_, double b_) :n(n_), k(k_), b(b_), f(false) {};
+    Segment() :n(), k(), b(), f(false) {};
+    Segment(int n_, double k_, double b_) :n(n_), k(k_), b(b_), f(false) {};
     double gt_x(double y)
     {
         return (y - b) / k;
@@ -65,89 +65,89 @@ public:
     {
         return k;
     }
-    friend point_for_cell;
+    friend Vertex;
 };
 
-class point_for_cell : public point
+class Vertex : public Point
 {
 private:
-    otrezok* otr1;
-    otrezok* otr2;
+    Segment* seg1;
+    Segment* seg2;
 public:
-    point_for_cell() :otr1(nullptr), otr2(nullptr) {};
-    point& operator=(const point& p)
+    Vertex() :seg1(nullptr), seg2(nullptr) {};
+    Point& operator=(const Point& p)
     {
         x = p.get_x();
         y = p.get_y();
         return *this;
     }
-    bool check_otr1()
+    bool check_seg1()
     {
-        return otr1->f;
+        return seg1->f;
     }
-    bool check_otr2()
+    bool check_seg2()
     {
-        return otr2->f;
+        return seg2->f;
     }
-    otrezok* get_otr1()
+    Segment* get_seg1()
     {
-        return otr1;
+        return seg1;
     }
-    otrezok* get_otr2()
+    Segment* get_seg2()
     {
-        return otr2;
+        return seg2;
     }
-    ~point_for_cell() { delete otr2; };
-    friend cell;
+    ~Vertex() { delete seg2; };
+    friend Cell;
 };
 
-class cell
+class Cell
 {
 private:
     int Num;
     int m;
-    point_for_cell* pfc;
+    Vertex* vert;
 public:
-    cell() :Num(0), m(0), pfc(nullptr) {};
-    point_for_cell& operator[](int i)
+    Cell() :Num(0), m(0), vert(nullptr) {};
+    Vertex& operator[](int i)
     {
-        if (i == m) return pfc[0];
-        else if (i == -1) return pfc[m - 1];
-        else return pfc[i];
+        if (i == m) return vert[0];
+        else if (i == -1) return vert[m - 1];
+        else return vert[i];
     }
     void init(int num_, int m_)
     {
         Num = num_;
         m = m_;
-        pfc = new point_for_cell[m_];
+        vert = new Vertex[m_];
     }
-    void create_otr()
+    void create_seg()
     {
         for (int i = 0; i < m - 1; ++i)
         {
-            if ((pfc[i + 1].x - pfc[i].x) != 0) {
-                pfc[i].otr2 = new otrezok(Num, (pfc[i + 1].y - pfc[i].y) / (pfc[i + 1].x - pfc[i].x), pfc[i].y -
-                    ((pfc[i + 1].y - pfc[i].y) / (pfc[i + 1].x - pfc[i].x)) * pfc[i].x);
-                pfc[i + 1].otr1 = pfc[i].otr2;
+            if ((vert[i + 1].x - vert[i].x) != 0) {
+                vert[i].seg2 = new Segment(Num, (vert[i + 1].y - vert[i].y) / (vert[i + 1].x - vert[i].x), vert[i].y -
+                    ((vert[i + 1].y - vert[i].y) / (vert[i + 1].x - vert[i].x)) * vert[i].x);
+                vert[i + 1].seg1 = vert[i].seg2;
             }
             else
             {
-                pfc[i].otr2 = new otrezok(Num, -1000000000., 1000000000. * pfc[i].x);
-                pfc[i + 1].otr1 = pfc[i].otr2;
+                vert[i].seg2 = new Segment(Num, -1000000000., 1000000000. * vert[i].x);
+                vert[i + 1].seg1 = vert[i].seg2;
             }
         }
-        if ((pfc[0].x - pfc[m - 1].x) != 0) {
-            pfc[m - 1].otr2 = new otrezok(Num, (pfc[0].y - pfc[m - 1].y) / (pfc[0].x - pfc[m - 1].x), pfc[m - 1].y -
-                ((pfc[0].y - pfc[m - 1].y) / (pfc[0].x - pfc[m - 1].x)) * pfc[m - 1].x);
-            pfc[0].otr1 = pfc[m - 1].otr2;
+        if ((vert[0].x - vert[m - 1].x) != 0) {
+            vert[m - 1].seg2 = new Segment(Num, (vert[0].y - vert[m - 1].y) / (vert[0].x - vert[m - 1].x), vert[m - 1].y -
+                ((vert[0].y - vert[m - 1].y) / (vert[0].x - vert[m - 1].x)) * vert[m - 1].x);
+            vert[0].seg1 = vert[m - 1].seg2;
         }
         else
         {
-            pfc[m - 1].otr2 = new otrezok(Num, -1000000000., 1000000000. * pfc[m - 1].x);
-            pfc[0].otr1 = pfc[m - 1].otr2;
+            vert[m - 1].seg2 = new Segment(Num, -1000000000., 1000000000. * vert[m - 1].x);
+            vert[0].seg1 = vert[m - 1].seg2;
         }
     }
-    ~cell() { delete[] pfc; }
+    ~Cell() { delete[] vert; }
 };
 
 
@@ -163,14 +163,14 @@ int main() {
     ofstream fout("result.txt");
     int n;
     fin >> n;
-    vector<point> vec1(n);
+    vector<Point> vec1(n);
     for (int i = 0; i < n; ++i)
         fin >> vec1[i];
     int p;
     fin >> p;
-    vector<cell> vec2(p);
-    map<double, point*> PFL_map;           //мэп для полос
-    multimap<double, point_for_cell*> PFC_map;  //мэп для точек событий
+    vector<Cell> vec2(p);
+    map<double, Point*> PFL_map;           //мэп для полос
+    multimap<double, Vertex*> PFC_map;  //мэп для точек событий
     int a; int b;
     bool f;
     for (int i = 0; i < p; ++i)
@@ -183,7 +183,7 @@ int main() {
             vec2[i][j] = vec1[b - 1];
             PFL_map.emplace(vec1[b - 1].get_y(), &vec1[b - 1]);
         }
-        vec2[i].create_otr();
+        vec2[i].create_seg();
         for (int k = 0; k < a; ++k)
             PFC_map.emplace(vec2[i][k].get_y(), &vec2[i][k]);
     }
@@ -191,13 +191,13 @@ int main() {
     //считываение точек для поиска из файла
     int enum_point_for_search;
     fin >> enum_point_for_search;
-    vector<point> point_for_search(enum_point_for_search);
+    vector<Point> point_for_search(enum_point_for_search);
     for (int i = 0; i < enum_point_for_search; ++i)
         fin >> point_for_search[i];
     //---------------------------------
     clock_t tStart1 = clock();
     //определение полос, в которых лежат точки
-    multimap<int, point*> map_for_search_point;                        //ключ-номер полосы, значение точка для поиска в ней
+    multimap<int, Point*> map_for_search_point;                        //ключ-номер полосы, значение точка для поиска в ней
     vector<int> num_of_slubs_with_point(enum_point_for_search);        //номер полос с точками (так, как они в файле)
     vector<int> sort_num_of_slubs_with_point(enum_point_for_search);   //номер полос с точками (отсортированный)
     map<double, int> slab_numbers;   //ключ - игрик полосы, значение - ее номер
@@ -226,12 +226,12 @@ int main() {
         vec_line[ii++] = p.first;
     //-----------------------------------------------------
 
-    multimap<double, otrezok*> last_map;
-    otrezok fict;
+    multimap<double, Segment*> last_map;
+    Segment fict;
 
-    map<int, point*> num_point_cell;
+    map<int, Point*> num_point_cell;
     //проход по деревьям!
-    vector<multimap<double, otrezok*>> vec_mp(sort_num_of_slubs_with_point[enum_point_for_search - 1]);
+    vector<multimap<double, Segment*>> vec_mp(sort_num_of_slubs_with_point[enum_point_for_search - 1]);
     int schet = 0;
     double x = 0;
 
@@ -241,39 +241,39 @@ int main() {
         auto it = PFC_map.equal_range(vec_line[schet]);
         for (auto itr = it.first; itr != it.second; ++itr)
         {
-            if (itr->second->check_otr1() && !itr->second->check_otr2())
+            if (itr->second->check_seg1() && !itr->second->check_seg2())
             {
-                vec_mp[schet - 1].erase(itr->second->get_otr1()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
-                vec_mp[schet].emplace(itr->second->get_otr2()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
-                    itr->second->get_otr2());
-                itr->second->get_otr2()->true_();
+                vec_mp[schet - 1].erase(itr->second->get_seg1()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
+                vec_mp[schet].emplace(itr->second->get_seg2()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
+                    itr->second->get_seg2());
+                itr->second->get_seg2()->true_();
             }
-            if (itr->second->check_otr2() && !itr->second->check_otr1())
+            if (itr->second->check_seg2() && !itr->second->check_seg1())
             {
-                vec_mp[schet - 1].erase(itr->second->get_otr2()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
-                vec_mp[schet].emplace(itr->second->get_otr1()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
-                    itr->second->get_otr1());
-                itr->second->get_otr1()->true_();
+                vec_mp[schet - 1].erase(itr->second->get_seg2()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
+                vec_mp[schet].emplace(itr->second->get_seg1()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
+                    itr->second->get_seg1());
+                itr->second->get_seg1()->true_();
             }
-            if (itr->second->check_otr2() && itr->second->check_otr1())
+            if (itr->second->check_seg2() && itr->second->check_seg1())
             {
-                vec_mp[schet - 1].erase(itr->second->get_otr1()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
-                vec_mp[schet - 1].erase(itr->second->get_otr2()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
+                vec_mp[schet - 1].erase(itr->second->get_seg1()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
+                vec_mp[schet - 1].erase(itr->second->get_seg2()->gt_x((vec_line[schet] + vec_line[schet - 1]) / 2));
             }
-            if (!itr->second->check_otr2() && !itr->second->check_otr1())
+            if (!itr->second->check_seg2() && !itr->second->check_seg1())
             {
-                vec_mp[schet].emplace(itr->second->get_otr2()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
-                    itr->second->get_otr2());
-                vec_mp[schet].emplace(itr->second->get_otr1()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
-                    itr->second->get_otr1());
+                vec_mp[schet].emplace(itr->second->get_seg2()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
+                    itr->second->get_seg2());
+                vec_mp[schet].emplace(itr->second->get_seg1()->gt_x((vec_line[schet + 1] + vec_line[schet]) / 2),
+                    itr->second->get_seg1());
 
-                if ((itr->second->get_otr1()->get_k() == 0) && (itr->second->get_otr2()->get_k() != 0))
-                    itr->second->get_otr2()->true_(); else
-                    if ((itr->second->get_otr2()->get_k() == 0) && (itr->second->get_otr1()->get_k() != 0))
-                        itr->second->get_otr1()->true_(); else
+                if ((itr->second->get_seg1()->get_k() == 0) && (itr->second->get_seg2()->get_k() != 0))
+                    itr->second->get_seg2()->true_(); else
+                    if ((itr->second->get_seg2()->get_k() == 0) && (itr->second->get_seg1()->get_k() != 0))
+                        itr->second->get_seg1()->true_(); else
                     {
-                        itr->second->get_otr2()->true_();
-                        itr->second->get_otr1()->true_();
+                        itr->second->get_seg2()->true_();
+                        itr->second->get_seg1()->true_();
                     }
             }
         }
