@@ -1,2 +1,3 @@
 D:\code\c++\slabs\x64\Release\slabs.exe
 D:\prog\c++\slabs\x64\Release\slabs.exe
+D:\МГТУ\практика 3 сем\c++\slabs\x64\Release\slabs.exe

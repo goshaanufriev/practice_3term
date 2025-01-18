@@ -91,12 +91,12 @@ int main()
             cells[i].vertices[j] = pts[vertexIndex - 1];
         }
     }
-    fin.close();
+    /*fin.close();
     
-    std::ifstream fin1("testdata3.txt");
+    std::ifstream fin1("testdata3.txt");*/
 
     int ntest;
-    if (!(fin1 >> ntest) || ntest <= 0)
+    if (!(fin >> ntest) || ntest <= 0)
     {
         std::cerr << "Ошибка с числом тестовых данных";
         return 1;
@@ -104,7 +104,7 @@ int main()
     std::vector<Point> testdata(ntest);
     for (int i = 0; i < ntest; ++i)
     {
-        if (!(fin1 >> testdata[i].x >> testdata[i].y))
+        if (!(fin >> testdata[i].x >> testdata[i].y))
         {
             std::cerr << "Ошибка считывания координат точки";
             return 1;
