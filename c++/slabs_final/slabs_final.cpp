@@ -8,16 +8,13 @@
 
 using namespace std;
 
-class Cell;
-class Vertex;
-
 class Point
 {
 protected:
     double x;
     double y;
 public:
-    friend ostream& operator<<(ostream& out, Point& p)
+    friend ostream& operator<<(ostream& out, const Point& p)
     {
         out << "( " << p.x << " ; " << p.y << " )";
         return out;
