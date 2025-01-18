@@ -1,0 +1,68 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36" version="25.0.3">
+  <diagram name="Страница — 1" id="O37dVOqsAupnZLXKEz4U">
+    <mxGraphModel dx="1328" dy="284" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BGMEAjTgKXroE_XRX-Do-2" target="BGMEAjTgKXroE_XRX-Do-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-345" y="145" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-2" value="N - число ячеек&lt;div&gt;M - число тестовых точек&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-445" y="30" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BGMEAjTgKXroE_XRX-Do-5" target="BGMEAjTgKXroE_XRX-Do-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-5" value="i=1...M&lt;div&gt;j=1...N&lt;br&gt;&lt;div&gt;k=1...K, K - количество углов i-го многоугольника&lt;/div&gt;&lt;/div&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-450" y="110" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BGMEAjTgKXroE_XRX-Do-6" target="BGMEAjTgKXroE_XRX-Do-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-6" value="det = AkP v AkA(k%K+1)&lt;div&gt;dets.append(det)&lt;/div&gt;&lt;div&gt;P - проверяемая точка&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-435" y="200" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BGMEAjTgKXroE_XRX-Do-8" target="BGMEAjTgKXroE_XRX-Do-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-510" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-495" y="330" />
+              <mxPoint x="-495" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BGMEAjTgKXroE_XRX-Do-8" target="BGMEAjTgKXroE_XRX-Do-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-94.99999999999977" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-8" value="All(dets) &amp;gt; 0 || All(dets) &amp;lt; 0" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-435" y="290" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-13" value="i - номер ячейки" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-570" y="380" width="125" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-14" value="да" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-490" y="307" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-18" value="прогоняем цикл дальше" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-155" y="380" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-19" value="нет" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-205" y="305" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BGMEAjTgKXroE_XRX-Do-23" target="BGMEAjTgKXroE_XRX-Do-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-23" value="i=1..X-1, X - количество уникальных x-координат точек" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="-630" y="480" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="BGMEAjTgKXroE_XRX-Do-24" value="AiA(i+1) - одна полоса" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-600" y="585" width="150" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

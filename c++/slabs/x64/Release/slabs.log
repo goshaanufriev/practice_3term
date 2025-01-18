@@ -1,0 +1,31 @@
+﻿  slabs.cpp
+D:\code\c++\slabs\slab_4.h(177,28): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+D:\code\c++\slabs\slabs.cpp(146,95): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+D:\code\c++\slabs\slabs.cpp(147,113): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+D:\code\c++\slabs\slabs.cpp(153,26): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(153,39): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+D:\code\c++\slabs\slabs.cpp(158,38): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(158,60): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(168,21): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  Создание кода
+  658 of 860 functions (76.5%) were compiled, the rest were copied from previous compilation.
+    213 functions were new in current compilation
+    31 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  slabs.vcxproj -> D:\code\c++\slabs\x64\Release\slabs.exe

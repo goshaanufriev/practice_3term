@@ -1,0 +1,2 @@
+D:\code\c++\slabs\x64\Debug\slabs.exe
+D:\prog\c++\slabs\x64\Debug\slabs.exe

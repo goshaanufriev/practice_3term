@@ -1,0 +1,3 @@
+﻿  slabs_final.cpp
+D:\code\c++\slabs_final\slabs_final.cpp(175,10): warning C4101: f: неиспользованная локальная переменная
+  slabs_final.vcxproj -> D:\code\c++\slabs_final\x64\Debug\slabs_final.exe
