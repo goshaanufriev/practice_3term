@@ -8,7 +8,6 @@
 #include "structures_4.h"
 #include "slab_4.h"
 
-
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const std::vector<T> vec)
 {
@@ -24,24 +23,11 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T> vec)
     return out;
 }
 
-static void perebor(const std::vector<Point>& testdata, const std::vector<Cell>& cells)
-{
-    std::vector<int> per = res2(testdata, cells);
-    std::cout << per;
-    std::ofstream file1("res1.txt");
-    if (!file1)
-    {
-        std::cerr << "Не удалось открыть файл для записи результатов." << std::endl;
-        return;
-    }
-    file1 << per;
-}
-
 int main()
 {
     setlocale(LC_ALL, "RU");
 
-    std::ifstream fin("problem.txt");
+    std::ifstream fin("10k.txt");
     if (!fin)
     {
         std::cerr << "Не удалось открыть файл";
@@ -69,7 +55,6 @@ int main()
         std::cerr << "Ошибка с числом ячеек";
         return 1;
     }
-    //double*** cells = new double** [ncells];
     std::vector<Cell> cells(ncells);
     for (size_t i = 0; i < ncells; ++i)
     {
@@ -114,7 +99,7 @@ int main()
     //auto st = std::chrono::high_resolution_clock::now();
     //std::vector<int> per = res2(testdata, cells);
     //auto finish = std::chrono::high_resolution_clock::now();
-    //std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(finish - st).count() << "\n";
+    //std::cout << std::chrono::duration_cast<std::chrono::microseconds>(finish - st).count() << "\n";
     ////std::cout << per;
     //std::ofstream file1("res1.txt");
     //if (!file1)
@@ -153,15 +138,27 @@ int main()
             cellsInSlabs[j].push_back(i);
         }
     }
+
+    auto tm1 = std::chrono::high_resolution_clock::now();
+
+    std::vector<std::vector<double>> cellsY(ncells);
+    std::vector<double> mincellsY(ncells);
     for (size_t i = 0; i < cellsInSlabs.size(); ++i)
     {
-        std::sort(begin(cellsInSlabs[i]), end(cellsInSlabs[i]), [&](int a, int b) {
-            std::vector<double> ay = MyMin(cells[a], slabs[i]);
-            std::vector<double> by = MyMin(cells[b], slabs[i]);
-            return *std::min_element(begin(ay),end(ay)) <
-                *std::min_element(begin(by), end(by));
-            });
+        for (size_t j = 0; j < cellsInSlabs[i].size(); ++j)
+        {
+            int cellIndex = cellsInSlabs[i][j];
+            cellsY[cellIndex] = YCellInSlab(cells[cellIndex], slabs[i]);
+            mincellsY[cellIndex] = *std::min_element(begin(cellsY[cellIndex]), end(cellsY[cellIndex]));
+        }
+        std::sort(begin(cellsInSlabs[i]), end(cellsInSlabs[i]), [&](int a, int b)
+        {
+            return mincellsY[a] < mincellsY[b];
+        });
     }
+
+    auto tm2 = std::chrono::high_resolution_clock::now();
+
     std::vector<int> res(testdata.size());
     for (size_t i = 0; i < res.size(); ++i)
     {
@@ -170,7 +167,7 @@ int main()
         std::vector<std::vector<double>> ally(minYs.size());
         for (size_t j = 0; j < ally.size(); ++j)
         {
-            ally[j] = MyMin(cells[cellsInSlabs[slabInd][j]], slabs[slabInd]);
+            ally[j] = YCellInSlab(cells[cellsInSlabs[slabInd][j]], slabs[slabInd]);
             minYs[j] = *std::min_element(begin(ally[j]),end(ally[j]));
         }
         size_t cellInd = binSearch(minYs, testdata[i].y);
@@ -190,8 +187,9 @@ int main()
         
     }
     auto finish = std::chrono::high_resolution_clock::now();
+    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(tm2 - tm1).count() << "\n";
     std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(finish - st).count() << "\n";
 
-    //std::cout << res << "\n";
+    std::cout << res << "\n";
     return 0;
 }

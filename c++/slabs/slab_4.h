@@ -2,21 +2,6 @@
 
 std::vector<double>& xslab(const std::vector<Point>& pts, std::vector<double>& arr)
 {
-    /*std::vector<double> allx(pts.size());
-	for (size_t i = 0; i < pts.size(); ++i)
-	{
-		allx[i]=pts[i].x;
-	}
-    std::sort(begin(allx), end(allx));
-    arr.push_back(allx[0]);
-    for (size_t i = 0; i < allx.size() - 1; ++i)
-    {
-        if (abs(allx[i] - allx[i + 1]) > 1E-10)
-        {
-            arr.push_back(allx[i + 1]);
-        }
-    }
-	return arr;*/
     std::set<double> unique_x;
     for (const auto& pt : pts)
         unique_x.insert(pt.x);
@@ -75,7 +60,7 @@ std::vector<double> xRange(const Cell& fig)
     return res;
 }
 
-std::vector<double> MyMin(const Cell& cell, const std::vector<double>& slab)
+std::vector<double> YCellInSlab(const Cell& cell, const std::vector<double>& slab)
 {
     std::vector<std::vector<size_t>> pair;
     std::vector<double> y;
@@ -129,24 +114,6 @@ bool ray_cast(const Point& point, const Cell& cell) {
     return intersections % 2 == 1; // Нечётное количество пересечений
 }
 
-bool check(const Point& pt, const Cell& cell)
-{
-    int s = 0;
-    for (size_t i = 0; i < cell.vertices.size(); ++i)
-    {
-        double det = (cell.vertices[i].x - pt.x) * (cell.vertices[(i + 1) % cell.vertices.size()].y - cell.vertices[i].y) -
-            (cell.vertices[(i + 1) % cell.vertices.size()].x - cell.vertices[i].x) * (cell.vertices[i].y - pt.y);
-        if (det > 0)
-            s += 1;
-        else if (det < 0)
-            s -= 1;
-    }
-    if (abs(s) == cell.vertices.size())
-        return true;
-    return false;
-}
-
-
 std::vector<int> res2(const std::vector<Point>& test, const std::vector<Cell>& cells)
 {
     std::vector<int> ans(test.size());
@@ -159,7 +126,7 @@ std::vector<int> res2(const std::vector<Point>& test, const std::vector<Cell>& c
             if (s)
             {
                 flag = 1;
-                ans.push_back(j + 1);
+                ans[i] = j+1;
                 break;
             }
         }

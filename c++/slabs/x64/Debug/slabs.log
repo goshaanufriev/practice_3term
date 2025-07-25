@@ -1,26 +1,23 @@
 ﻿  slabs.cpp
-D:\code\c++\slabs\slab_4.h(177,28): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(151,95): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
           with
           [
               _Ty=int
           ]
-D:\code\c++\slabs\slabs.cpp(144,95): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(152,113): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
           with
           [
               _Ty=int
           ]
-D:\code\c++\slabs\slabs.cpp(145,113): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(158,26): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(158,39): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-D:\code\c++\slabs\slabs.cpp(151,26): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-D:\code\c++\slabs\slabs.cpp(151,39): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
-          with
-          [
-              _Ty=int
-          ]
-D:\code\c++\slabs\slabs.cpp(156,38): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-D:\code\c++\slabs\slabs.cpp(156,60): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-D:\code\c++\slabs\slabs.cpp(166,21): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(168,45): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(170,42): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(174,38): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(174,60): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\code\c++\slabs\slabs.cpp(185,21): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   slabs.vcxproj -> D:\code\c++\slabs\x64\Debug\slabs.exe
